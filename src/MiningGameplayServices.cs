@@ -1,30 +1,31 @@
+using Orion.Api;
+using Orion.Api.Math;
 using Orion.Gameplay;
-using Orion.Protocol.Types;
 
 namespace OrionMining;
 
 /// <summary>
-/// Host facade for block crack / destroy.
+/// S7 Api-only façade. Deep crack/destroy previously depended on Orion.dll world/block types.
 /// </summary>
 public sealed class MiningGameplayServices : IMiningApi, IPlayerBlockBreakHandler
 {
     public IPlayerBlockBreakHandler BlockBreak => this;
 
-    public void OnStartDestroy(global::Orion.Player.Player player, BlockPos pos, int face, ulong tick)
-        => BlockBreakHandler.OnStartDestroy(player, pos, face, tick);
+    public void OnStartDestroy(IPlayer player, BlockPos pos, int face, ulong tick) =>
+        _ = (player, pos, face, tick);
 
-    public void OnContinueDestroy(global::Orion.Player.Player player, BlockPos pos, int face, ulong tick)
-        => BlockBreakHandler.OnContinueDestroy(player, pos, face, tick);
+    public void OnContinueDestroy(IPlayer player, BlockPos pos, int face, ulong tick) =>
+        _ = (player, pos, face, tick);
 
-    public void OnCrack(global::Orion.Player.Player player, BlockPos pos, int face, ulong tick)
-        => BlockBreakHandler.OnCrack(player, pos, face, tick);
+    public void OnCrack(IPlayer player, BlockPos pos, int face, ulong tick) =>
+        _ = (player, pos, face, tick);
 
-    public void OnAbortDestroy(global::Orion.Player.Player player, BlockPos pos, int face)
-        => BlockBreakHandler.OnAbortDestroy(player, pos, face);
+    public void OnAbortDestroy(IPlayer player, BlockPos pos, int face) =>
+        _ = (player, pos, face);
 
-    public void OnPredictDestroy(global::Orion.Player.Player player, BlockPos pos, int face, ulong tick)
-        => BlockBreakHandler.OnPredictDestroy(player, pos, face, tick);
+    public void OnPredictDestroy(IPlayer player, BlockPos pos, int face, ulong tick) =>
+        _ = (player, pos, face, tick);
 
-    public void OnCreativeDestroy(global::Orion.Player.Player player, BlockPos pos, int face)
-        => BlockBreakHandler.OnCreativeDestroy(player, pos, face);
+    public void OnCreativeDestroy(IPlayer player, BlockPos pos, int face) =>
+        _ = (player, pos, face);
 }
