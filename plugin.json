@@ -1,7 +1,6 @@
 {
   "id": "orion:mining",
   "version": "1.0.0",
-  "api": "0.1.0",
   "description": "Block crack / destroy (opt-in). Soft-depends on inventory for tool break-time.",
   "authors": ["Orion"],
   "main": "OrionMining.OrionMiningPlugin",
