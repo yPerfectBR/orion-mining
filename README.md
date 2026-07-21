@@ -1,9 +1,23 @@
-# VanillaMining
+# Orion Mining
 
 Opt-in vanilla block crack animation and destroy.
 
+- **Manifest id:** `orion:mining`
 - **Provides:** `orion:mining`
-- **Softdepend:** `VanillaInventory` (tool break-time + `OnBreakBlock`)
-- **API:** `IVanillaMiningApi` / `IPlayerBlockBreakHandler`
+- **Soft depend:** `orion:inventory` (tool break-time + `OnBreakBlock`)
 
-Core dispatches AuthInput block-destroy actions here. Place stays in VanillaBuilding.
+## Build
+
+```bash
+dotnet build OrionMining.csproj -c Release
+```
+
+## API
+
+Registered services: `IMiningApi`, `IPlayerBlockBreakHandler`.
+
+The core dispatches `AuthInput` block-destroy actions here. Placement stays in **orion:building**.
+
+## CI
+
+GitHub Actions smoke-boots the server with this plugin loaded after a Release build.
