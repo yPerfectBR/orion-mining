@@ -13,7 +13,7 @@ public sealed class OrionMiningPlugin : IOrionPlugin
 
     public void OnEnable(IPluginContext context)
     {
-        MiningGameplayServices services = new();
+        MiningGameplayServices services = new(context.Server, context.Services);
         context.Services.Register<IMiningApi>(services, this);
         context.Services.Register<IPlayerBlockBreakHandler>(services, this);
     }
