@@ -16,10 +16,9 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Orion.Api" Version="0.1.4" />
-    <PackageReference Include="Orion.Gameplay.Api" Version="0.1.4" />
-    <PackageReference Include="Orion.PluginContracts" Version="0.1.4" />
-    <PackageReference Include="Orion.Protocol" Version="0.1.4" />
+    <PackageReference Include="Orion.Api" Version="0.1.9" />
+    <PackageReference Include="Orion.Gameplay.Api" Version="0.1.9" />
+    <PackageReference Include="Orion.PluginContracts" Version="0.1.9" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../OrionMining.csproj" />

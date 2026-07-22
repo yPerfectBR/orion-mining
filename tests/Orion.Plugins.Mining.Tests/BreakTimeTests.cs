@@ -76,9 +76,27 @@ public sealed class PlayerBreakBlockSignalCancelTests
         public string TypeIdentifier => "minecraft:player";
         public Orion.Api.IDimension? Dimension => null;
         public Orion.Api.Math.Vec3f Position => default;
+        public Orion.Api.Math.Vec3f Velocity { get; set; }
+        public bool IsAlive => true;
+        public bool IsSprinting => false;
+        public bool IsSwimming => false;
+        public bool IsFlying => false;
+        public float Yaw => 0;
+        public float Pitch => 0;
         public bool IsPlayer() => true;
         public T? GetTrait<T>() where T : class => null;
         public void NotifyContainerUpdate(Orion.Api.Containers.IContainer container) { }
+        public void SetAttribute(string name, float min, float max, float current, float defaultValue) { }
+        public bool TryGetAttribute(string name, out float min, out float max, out float current, out float defaultValue)
+        {
+            min = max = current = defaultValue = 0;
+            return false;
+        }
+        public void SyncAttributes() { }
+        public void Kill(Orion.Api.IEntity? killer = null, int? damageCause = null) { }
+        public bool GetActorFlag(string flag) => false;
+        public void SetActorFlag(string flag, bool value) { }
+        public bool HasEffect(string effectName) => false;
         public string Username => "stub";
         public string Xuid => "";
         public Guid Uuid => Guid.Empty;

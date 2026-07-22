@@ -36,6 +36,9 @@ public sealed class BlockBreakHandlerCancelTests
         public IWorld? DefaultWorld => null;
         public IWorld? GetWorld(string name) => null;
         public IReadOnlyCollection<IWorld> Worlds { get; } = [];
+        public double Tps => 20;
+        public int SessionCount => 0;
+        public int SimulationDistance => 4;
 
         public void Emit(ISignal signal)
         {
@@ -72,6 +75,12 @@ public sealed class BlockBreakHandlerCancelTests
         public bool RevertSent { get; private set; }
         public string Name => "overworld";
         public IWorld World { get; } = new FakeWorld();
+        public ulong CurrentTick => 0;
+        public int Difficulty => 1;
+        public bool DrowningDamage => true;
+        public int ChunkCount => 0;
+        public int DimensionNetworkId => 0;
+        public bool IsSessionThreadingEnabled => false;
 
         readonly FakeBlock _stone = new();
 
@@ -92,6 +101,18 @@ public sealed class BlockBreakHandlerCancelTests
         public IReadOnlyCollection<IEntity> GetEntities() => [];
 
         public void Broadcast(IOutboundPacket packet, PacketBroadcastOptions? options = null) { }
+
+        public void RequestChunkPayloads(ReadOnlySpan<(int X, int Z)> chunks, Action<int, int, byte[], uint> onReady) { }
+        public void AddChunkViewer(int x, int z) { }
+        public bool RemoveChunkViewer(int x, int z) => false;
+        public bool HasChunkViewers(int x, int z) => false;
+        public bool UnloadChunk(int x, int z) => false;
+        public void SetPlayerChunkIndex(IPlayer player, int chunkX, int chunkZ) { }
+        public void RemovePlayerChunkIndex(IPlayer player) { }
+        public void UpdateSimulationChunksFor(IPlayer player, int centerChunkX, int centerChunkZ, int simulationDistance) { }
+        public void SyncPlayerViewHalo(IPlayer player, int viewDistanceChunks, int simulationDistanceChunks) { }
+        public void NotifyChunkPresented(IPlayer player, int chunkX, int chunkZ) { }
+        public bool IsEntityTransferInFlight(ulong runtimeId) => false;
     }
 
     sealed class FakeWorld : IWorld
@@ -99,6 +120,9 @@ public sealed class BlockBreakHandlerCancelTests
         public string Name => "world";
         public IDimension? GetDimension(string name) => null;
         public IReadOnlyCollection<IDimension> Dimensions { get; } = [];
+        public double TickWork => 0;
+        public int? AttachedWorkerId => null;
+        public IServer? Server => null;
     }
 
     sealed class FakeBlock : IBlock
@@ -109,6 +133,10 @@ public sealed class BlockBreakHandlerCancelTests
         public FakeBlock() => Permutation = new FakePermutation(Type);
 
         public void NotifyBroken(IPlayer breaker, BlockPos blockPosition) { }
+        public bool TryGetStateInt(string key, out int value) { value = 0; return false; }
+        public bool TryGetStateString(string key, out string value) { value = ""; return false; }
+        public void SetStateInt(string key, int value) { }
+        public void SetStateString(string key, string value) { }
     }
 
     sealed class FakeBlockType : IBlockType
@@ -134,9 +162,27 @@ public sealed class BlockBreakHandlerCancelTests
         public string TypeIdentifier => "minecraft:player";
         public IDimension? Dimension { get; } = dimension;
         public Vec3f Position { get; set; }
+        public Vec3f Velocity { get; set; }
+        public bool IsAlive => true;
+        public bool IsSprinting => false;
+        public bool IsSwimming => false;
+        public bool IsFlying => false;
+        public float Yaw => 0;
+        public float Pitch => 0;
         public bool IsPlayer() => true;
         public T? GetTrait<T>() where T : class => null;
         public void NotifyContainerUpdate(Orion.Api.Containers.IContainer container) { }
+        public void SetAttribute(string name, float min, float max, float current, float defaultValue) { }
+        public bool TryGetAttribute(string name, out float min, out float max, out float current, out float defaultValue)
+        {
+            min = max = current = defaultValue = 0;
+            return false;
+        }
+        public void SyncAttributes() { }
+        public void Kill(IEntity? killer = null, int? damageCause = null) { }
+        public bool GetActorFlag(string flag) => false;
+        public void SetActorFlag(string flag, bool value) { }
+        public bool HasEffect(string effectName) => false;
         public string Username => "tester";
         public string Xuid => "";
         public Guid Uuid => Guid.Empty;
